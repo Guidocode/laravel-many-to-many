@@ -13,9 +13,13 @@ class Post extends Model
         return $this->belongsTo('App\Category');
     }
 
+    // creo collegamento con Tag
+    public function tags(){
+        return $this->belongsToMany('App\Tag');
+    }
+
 
     // creo funzione statica che genera lo slug univoco
-
     public static function genereteSlug($title){
 
         $slug = Str::slug($title, '-');
@@ -35,7 +39,6 @@ class Post extends Model
 
 
     //fillable
-
     protected $fillable = [
         'title',
         'slug',
