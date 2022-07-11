@@ -13,16 +13,16 @@
                 <h2 class="card-title">{{ $post->title }}</h2>
 
                 @if($post->category)
-                        <h4 class="d-inline"><span class="badge bg-info text-dark">{{ $post->category->name }}</span></h4>
+                        <h4 class="d-inline mr-2"><span class="badge bg-info text-dark">{{ $post->category->name }}</span></h4>
                 @endif
 
                 @foreach ($post->tags as $tag)
                 @if ($post->tags)
-                    <h6 class="d-inline ml-2"><span class="badge badge-pill badge-success">{{$tag->name}}</span></h6>
+                    <h6 class="d-inline"><span class="badge badge-pill badge-success">{{$tag->name}}</span></h6>
                 @endif
                 @endforeach
 
-                <p class="card-text">{{ $post->description }}</p>
+                <p class="card-text mt-3">{{ $post->description }}</p>
 
                 <a class="btn btn-secondary mx-1" href="{{ route('admin.posts.index', $post) }}">GO BACK</a>
                 <a class="btn btn-primary mx-1" href="{{ route('admin.posts.edit', $post) }}">EDIT</a>

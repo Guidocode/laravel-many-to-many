@@ -53,7 +53,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         // arrivano i dati da create
 
@@ -105,10 +105,13 @@ class PostController extends Controller
         // modifico il record passato con id
         $post = Post::find($id);
 
-        //prendo tutte le categorie e le passo alla show
+        //prendo tutte le categorie e le passo alla update
         $categories = Category::all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        //prendo tutti i tags e le passo alla update
+        $tags = Tag::all();
+
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
 
     }
 

@@ -36,9 +36,7 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Descrizione</label> <br>
                         <textarea name="description" id="description" cols="30" rows="10"
-                        class="form-control @error('title') is-invalid @enderror" required>
-                            {{ old('description') }}
-                        </textarea>
+                        class="form-control @error('title') is-invalid @enderror" required>{{ old('description') }}</textarea>
                         @error('description')
                             <p class="invalid-feedback">{{ $message }}</p>
                         @enderror
@@ -61,9 +59,9 @@
                         @foreach ($tags as $tag)
                         <input type="checkbox"
                         name="tags[]"
-                        id="{{$loop->iteration}}"
+                        id="tag{{$loop->iteration}}"
                         value="{{ $tag->id }}">
-                        <label class="mr-3" for="{{$loop->iteration}}">{{$tag->name}}</label>
+                        <label class="mr-3" for="tag{{$loop->iteration}}">{{$tag->name}}</label>
                         @endforeach
                     </div>
 
