@@ -129,8 +129,21 @@ class PostController extends Controller
 
         $data = $request->all();
 
-        $data['slug'] = Post::genereteSlug($data['title']);
+        // cambio lo slug solo se modifico il titolo
+        if($data['title'] != $post->title){
+            $data['slug'] = Post::genereteSlug($data['title']);
+        }
+
         $post->update($data);
+
+        // verifico se esiste l'array tags dentro data con il metodo array_key_exists(), se esiste faccio sync() altrimenti detach
+        if(array_key_exists('tags', $data)){
+
+            $post->tags()->sync($data['tags']);
+        }else{
+
+            $post->tags()->detach($data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $post);
     }

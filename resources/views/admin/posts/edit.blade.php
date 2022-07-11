@@ -52,15 +52,22 @@
                         </select>
                     </div>
 
-                    {{-- <div class="mb-3">
+                    <div class="mb-3">
                         @foreach ($tags as $tag)
                         <input type="checkbox"
+
+                        @if (!$errors->any() && $post->tags->contains($tag->id))
+                            checked
+                        @elseif ($errors->any() && in_array($tag->id, old('tags', [])))
+                            checked
+                        @endif
+
                         name="tags[]"
                         id="{{$loop->iteration}}"
-                        value="{{ $tag->id }}">
+                        value="{{$tag->id}}">
                         <label class="mr-3" for="{{$loop->iteration}}">{{$tag->name}}</label>
                         @endforeach
-                    </div> --}}
+                    </div>
 
 
                     <button type="submit" class="btn btn-primary">Submit</button>
