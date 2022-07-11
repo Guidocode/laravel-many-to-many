@@ -26,12 +26,14 @@
                         <th scope="row">{{$post->id}}</th>
                         <td>{{$post->title}}</td>
                         <td>{{$post->slug}}</td>
-                        <td>{{$post->category ? $post->category->name : '/'}}</td>
+                        <td>
+                            <h4><span class="badge bg-info text-dark">{{$post->category ? $post->category->name : '/'}}</span></h4>
+                        </td>
                         <td>
                             @forelse ($post->tags as $tag)
-                            {{$tag->name}}
+                            <h6><span class="badge badge-pill badge-warning">{{$tag->name}}</span></h6>
                             @empty
-                                /
+                            <h6><span class="badge badge-pill badge-warning">/</span></h6>
                             @endforelse
                         </td>
                         <td class="d-flex">
