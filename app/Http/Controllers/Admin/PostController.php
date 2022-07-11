@@ -142,7 +142,7 @@ class PostController extends Controller
             $post->tags()->sync($data['tags']);
         }else{
 
-            $post->tags()->detach($data['tags']);
+            $post->tags()->detach();
         }
 
         return redirect()->route('admin.posts.show', $post);

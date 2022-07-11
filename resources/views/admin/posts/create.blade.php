@@ -60,7 +60,10 @@
                         <input type="checkbox"
                         name="tags[]"
                         id="tag{{$loop->iteration}}"
-                        value="{{ $tag->id }}">
+                        value="{{ $tag->id }}"
+                        @if (in_array($tag->id, old('tags', [])))
+                            checked
+                        @endif>
                         <label class="mr-3" for="tag{{$loop->iteration}}">{{$tag->name}}</label>
                         @endforeach
                     </div>
