@@ -16,7 +16,7 @@
                 <th scope="col">title</th>
                 <th scope="col">slug</th>
                 <th scope="col">category</th>
-                <th scope="col">description</th>
+                <th scope="col">tag</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -27,7 +27,13 @@
                         <td>{{$post->title}}</td>
                         <td>{{$post->slug}}</td>
                         <td>{{$post->category ? $post->category->name : '/'}}</td>
-                        <td>{{$post->description}}</td>
+                        <td>
+                            @forelse ($post->tags as $tag)
+                            {{$tag->name}}
+                            @empty
+                                /
+                            @endforelse
+                        </td>
                         <td class="d-flex">
                             <a class="btn btn-success mx-1" href="{{ route('admin.posts.show', $post) }}">SHOW</a>
                             <a class="btn btn-primary mx-1" href="{{ route('admin.posts.edit', $post) }}">EDIT</a>
