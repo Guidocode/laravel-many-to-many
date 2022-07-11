@@ -7,6 +7,7 @@ use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -36,11 +37,14 @@ class PostController extends Controller
     public function create()
     {
 
-        //prendo tutte le categorie e le passo alla show
+        //prendo tutte le categorie e le passo alla store
         $categories = Category::all();
 
+        //prendo tutti i tags e le passo alla store
+        $tags = Tag::all();
+
         // ritorno alla view create
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -49,7 +53,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request)
+    public function store(Request $request)
     {
         // arrivano i dati da create
 
@@ -61,6 +65,14 @@ class PostController extends Controller
 
         $new_post->save();
         // dd($new_post);
+
+
+        // verifi se esiste l'array tags dentro data con il metodo array_key_exists() poi faccio l'attach
+        if(array_key_exists('tags', $data)){
+
+            $new_post->tags()->attach($data['tags']);
+        }
+        // dd($data);
 
         return redirect()->route('admin.posts.show', $new_post);
     }
